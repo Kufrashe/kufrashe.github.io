@@ -8,6 +8,78 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/4f3b0bfa0c.js" crossorigin="anonymous"></script>
+  <style>
+    /* PERFORMANCE OPTIMIZATIONS */
+    /* Reduce animation intensity and delay for faster load */
+    .animated { opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease; }
+    .animated.visible { opacity: 1; transform: none; }
+    /* Reduce box-shadow and background blur for better perf on mobile */
+    .glass {
+      background: rgba(20,20,40,0.78);
+      box-shadow: 0 2px 12px rgba(20,20,40,0.15);
+      backdrop-filter: blur(4px);
+    }
+    /* Prominent iframe section */
+    .highlight-game-section {
+      max-width: 680px;
+      margin: 32px auto 40px auto;
+      padding: 30px 24px 26px 24px;
+      background: linear-gradient(135deg, #2a3efa 60%, #eebbc3 100%);
+      border-radius: 22px;
+      box-shadow: 0 4px 32px 0 rgba(42,62,250,0.25), 0 1.5px 12px 0 rgba(238,187,195,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+      position: relative;
+      border: 2px solid #f0f0f0;
+    }
+    .highlight-game-section h2 {
+      margin-top: 0;
+      font-size: 2.3em;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px #0008;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .highlight-game-section .itch-iframe {
+      margin: 0 0 12px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 18px 0 #0d0d2b55;
+      border: 2px solid #2a3efa;
+      background: #0d0d2b;
+      overflow: hidden;
+    }
+    .highlight-game-section .game-info {
+      color: #f0f0f0;
+      font-size: 1.09em;
+      margin-bottom: 2px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .highlight-game-section .game-link {
+      color: #ffe066;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-top: 4px;
+      font-size: 1.11em;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .highlight-game-section {
+        max-width: 98vw;
+        padding: 18px 2vw;
+      }
+      .highlight-game-section .itch-iframe {
+        width: 99vw !important;
+        min-width: 0;
+        max-width: 98vw;
+      }
+    }
+  </style>
 </head>
 <body>
   <canvas id="tech-bg"></canvas>
@@ -46,12 +118,38 @@
       </div>
     </div>
   </header>
+
+  <!-- PROMINENT FEATURED GAME SECTION -->
+  <section class="highlight-game-section animated fadeInDown" style="margin-top:32px;">
+    <h2><i class="fa-brands fa-itch-io"></i> Play: Catch Em Things <span class="tag" style="background:#ffe066;color:#333;padding:3px 10px;border-radius:7px;font-size:0.75em;letter-spacing:0.5px;margin-left:10px;">Featured</span></h2>
+    <div class="itch-iframe" style="width:554px;max-width:100%;">
+      <iframe frameborder="0"
+        src="https://itch.io/embed/3741666?linkback=true&amp;border_width=2&amp;bg_color=0d0d2b&amp;fg_color=f0f0f0&amp;border_color=2a3efa"
+        width="554" height="169"
+        allowfullscreen
+        title="Catch Em Things by Kufrashe"
+        loading="lazy"
+        style="width:100%;border:none;min-width:240px;background:#0d0d2b;">
+        <a href="https://kufrashe.itch.io/catch-em-things">Catch Em Things by Kufrashe</a>
+      </iframe>
+    </div>
+    <div class="game-info">
+      <strong>Catch Em Things</strong> is a vibrant, fast-paced arcade game by Kufrashe.<br>
+      <b>Genre:</b> Arcade, Action &bull; <b>Platform:</b> Windows/Web<br>
+      <b>Goal:</b> Catch as many falling objects as you can—beat your high score!
+    </div>
+    <a class="game-link" href="https://kufrashe.itch.io/catch-em-things" target="_blank" rel="noopener">
+      View Game Page & Get More Info
+    </a>
+  </section>
+  <!-- END PROMINENT FEATURED GAME SECTION -->
+
   <main>
     <section id="about" class="glass animated fadeInLeft about-double">
       <div class="about-panel">
         <h2><i class="fa-solid fa-user"></i> About Kudakwashe</h2>
         <p>
-          <b>Kudakwashe G Mazikana</b> is a software engineer, student at Telone Center for Learning (Diploma in Software Engineering), and the founder of Kufrashe Technologies. Based in Harare, Zimbabwe, Kudakwashe focuses on scalable web apps, robust backends, and innovative problem-solving, with a passion for using tech to make a real-world impact.
+          <b>Kudakwashe G Mazikana</b> is a software engineer, student at Telone Center for Learning (Diploma in Software Engineering), and the founder of Kufrashe Technologies. Based in Harare, Zimba[...]
         </p>
         <ul class="about-list">
           <li><b>🎓 Education:</b> Telone Center for Learning</li>
@@ -62,7 +160,7 @@
       <div class="about-panel">
         <h2><i class="fa-solid fa-gamepad"></i> About Kufrashe</h2>
         <p>
-          <b>Kufrashe</b> is my creative and indie tech identity. Under this brand, I build games, tools, and digital art—exploring the playful, experimental side of technology. My indie games, such as <b>MAGNETIC-The Game</b>, showcase a blend of unique mechanics and bold ideas, often leveraging engines like Godot, Unity, and more.
+          <b>Kufrashe</b> is my creative and indie tech identity. Under this brand, I build games, tools, and digital art—exploring the playful, experimental side of technology. My indie games, such[...]
         </p>
         <ul class="about-list">
           <li><b>🎮 Indie Studio:</b> Kufrashe Technologies (2018–Present)</li>
@@ -188,7 +286,7 @@
     <p>&copy; 2025 Kudakwashe G Mazikana & Kufrashe. All rights reserved. | <a href="https://github.com/Kufrashe" target="_blank">GitHub</a></p>
   </footer>
   <script>
-    // Typewriter effect for multi-role
+    // Typewriter effect for multi-role (kept as is, but reduced random delay)
     const roles = [
       "Software Engineer",
       "Game Developer",
@@ -205,22 +303,22 @@
       const fullText = roles[twIndex];
       if (!twBack && twChar <= fullText.length) {
         twSpan.textContent = fullText.substring(0, twChar++);
-        setTimeout(typeWriter, 80 + Math.random()*40);
+        setTimeout(typeWriter, 60 + Math.random()*20); // faster
       } else if (!twBack && twChar > fullText.length) {
         twBack = true;
-        setTimeout(typeWriter, 1200);
+        setTimeout(typeWriter, 900);
       } else if (twBack && twChar > 0) {
         twSpan.textContent = fullText.substring(0, --twChar);
-        setTimeout(typeWriter, 25);
+        setTimeout(typeWriter, 20);
       } else {
         twBack = false;
         twIndex = (twIndex + 1) % roles.length;
-        setTimeout(typeWriter, 400);
+        setTimeout(typeWriter, 350);
       }
     }
     window.addEventListener('DOMContentLoaded', typeWriter);
 
-    // Techy background particles (simple circuit/line effect)
+    // Techy background particles (reduced number for perf)
     const canvas = document.getElementById('tech-bg');
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -275,7 +373,8 @@
     }
     function initParticles() {
       particles = [];
-      for(let i=0; i<60; i++) particles.push(new Particle());
+      const numParticles = window.innerWidth < 600 ? 18 : 32; // fewer for perf
+      for(let i=0; i<numParticles; i++) particles.push(new Particle());
     }
     window.addEventListener('resize', () => {resizeCanvas();initParticles();});
     initParticles();
@@ -291,8 +390,14 @@
         }
       });
     }
-    window.addEventListener('scroll', checkFade);
+    window.addEventListener('scroll', checkFade, {passive:true});
     window.addEventListener('load', checkFade);
+
+    // Perf: Defer loading of images in featured projects
+    document.querySelectorAll('.project-img').forEach(img => {
+      img.setAttribute('loading', 'lazy');
+      img.decoding = 'async';
+    });
   </script>
 </body>
 </html>
