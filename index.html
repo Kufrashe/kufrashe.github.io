@@ -8,76 +8,378 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/4f3b0bfa0c.js" crossorigin="anonymous"></script>
+
   <style>
-    /* PERFORMANCE OPTIMIZATIONS */
-    /* Reduce animation intensity and delay for faster load */
-    .animated { opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease; }
-    .animated.visible { opacity: 1; transform: none; }
-    /* Reduce box-shadow and background blur for better perf on mobile */
-    .glass {
-      background: rgba(20,20,40,0.78);
-      box-shadow: 0 2px 12px rgba(20,20,40,0.15);
-      backdrop-filter: blur(4px);
+    :root{
+      --bg-1:#0b1020;
+      --bg-2:#0d0d2b;
+      --accent-1:#2a3efa;
+      --accent-2:#eebbc3;
+      --muted:#cfd7ff33;
+      --glass-bg: rgba(20,20,40,0.7);
     }
-    /* Prominent iframe section */
+
+    /* Page background animated gradient */
+    body{
+      margin:0;
+      font-family: 'Roboto', sans-serif;
+      color:#e9eefb;
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(46,56,242,0.12), transparent 10%),
+                  radial-gradient(900px 500px at 90% 90%, rgba(238,187,195,0.08), transparent 10%),
+                  linear-gradient(180deg, var(--bg-1), var(--bg-2) 60%);
+      min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x: hidden;
+    }
+
+    /* subtle animated noise overlay */
+    .animated-bg{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.02;
+      mix-blend-mode: overlay;
+      z-index:0;
+      animation: drift 30s linear infinite;
+    }
+    @keyframes drift {
+      from { transform: translateY(0) translateX(0); }
+      to { transform: translateY(-40px) translateX(40px); }
+    }
+
+    nav{
+      position:sticky;
+      top:12px;
+      z-index:60;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 20px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .logo-glow{
+      font-weight:700;
+      font-family:'Montserrat',sans-serif;
+      color:#fff;
+      background: linear-gradient(90deg,var(--accent-1),#7f53ac 60%,var(--accent-2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color: transparent;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      position:relative;
+    }
+    .logo-glow .pulse-dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--accent-1);
+      box-shadow:0 0 18px rgba(42,62,250,0.8);
+      margin-left:6px;
+    }
+    nav ul{
+      display:flex;
+      gap:10px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    nav a{
+      color: #dfe8ff;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      transition: all .18s ease;
+      font-weight:500;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:0.95rem;
+    }
+    nav a:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(20,20,40,0.28);
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+
+    header.main-header{
+      max-width:1100px;
+      margin:14px auto 22px;
+      position:relative;
+      z-index:10;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .intro{
+      display:flex;
+      gap:22px;
+      align-items:center;
+      width:100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:28px;
+      border-radius:18px;
+      box-shadow: 0 8px 48px rgba(6,8,20,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .avatar-glow{
+      width:140px;
+      height:140px;
+      border-radius:18px;
+      flex:0 0 140px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: linear-gradient(135deg, rgba(42,62,250,0.15), rgba(238,187,195,0.08));
+      padding:8px;
+      transition: transform .45s cubic-bezier(.2,.9,.3,1);
+    }
+    .avatar-glow:hover{ transform: translateY(-6px) rotate(-2deg) scale(1.02); }
+    .avatar{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:12px;
+      display:block;
+      filter: drop-shadow(0 8px 22px rgba(0,0,0,0.45));
+      background: rgba(0,0,0,0.12);
+      padding:6px;
+    }
+
+    .intro h1{
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      font-size:1.6rem;
+      letter-spacing:0.6px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .intro h2{
+      margin:6px 0 12px 0;
+      font-weight:500;
+      color:#dbe7ff;
+      font-size:1rem;
+    }
+    .typewriter{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      color:#fff;
+      margin-bottom:10px;
+    }
+    .blinker{ opacity:0.85; color:var(--accent-2); }
+
+    .intro-buttons{ display:flex; gap:10px; margin-top:6px; flex-wrap:wrap; }
+    .cta-btn{
+      background: linear-gradient(90deg,var(--accent-1),#7f53ac);
+      color:#0d0d2b;
+      padding:10px 14px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      box-shadow: 0 8px 30px rgba(42,62,250,0.12);
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+    .cta-btn.secondary{
+      background: transparent;
+      color:#dfe8ff;
+      border:1px solid rgba(255,255,255,0.04);
+      font-weight:600;
+    }
+    .cta-btn:hover{ transform: translateY(-4px); }
+
+    /* PROMINENT FEATURED GAME SECTION */
     .highlight-game-section {
-      max-width: 680px;
-      margin: 32px auto 40px auto;
-      padding: 30px 24px 26px 24px;
-      background: linear-gradient(135deg, #2a3efa 60%, #eebbc3 100%);
-      border-radius: 22px;
-      box-shadow: 0 4px 32px 0 rgba(42,62,250,0.25), 0 1.5px 12px 0 rgba(238,187,195,0.08);
+      max-width: 760px;
+      margin: 22px auto 30px;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 10px 48px rgba(2,4,20,0.7);
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 2;
       position: relative;
-      border: 2px solid #f0f0f0;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: linear-gradient(135deg, rgba(42,62,250,0.12) 10%, rgba(238,187,195,0.06) 100%);
+      overflow:visible;
     }
     .highlight-game-section h2 {
       margin-top: 0;
-      font-size: 2.3em;
+      font-size: 1.6em;
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 12px #0008;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      letter-spacing: 0.6px;
+      margin-bottom: 12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
-    .highlight-game-section .itch-iframe {
-      margin: 0 0 12px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 18px 0 #0d0d2b55;
-      border: 2px solid #2a3efa;
+
+    .game-art-wrap{
+      width:100%;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .game-cover{
+      width:170px;
+      height:220px;
+      border-radius:12px;
+      overflow:hidden;
+      flex:0 0 170px;
+      box-shadow: 0 10px 36px rgba(2,6,20,0.7);
+      border:1px solid rgba(255,255,255,0.03);
+      background-size:cover;
+      background-position:center;
+      transition: transform .25s cubic-bezier(.2,.9,.3,1);
+    }
+    .game-cover:hover{ transform: translateY(-8px) scale(1.03); }
+    .itch-iframe {
+      flex:1 1 420px;
+      min-width:260px;
+      border-radius:10px;
+      box-shadow: 0 6px 28px rgba(2,6,20,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
       background: #0d0d2b;
       overflow: hidden;
     }
-    .highlight-game-section .game-info {
+    .game-info{
       color: #f0f0f0;
-      font-size: 1.09em;
-      margin-bottom: 2px;
-      font-family: 'Roboto', sans-serif;
+      font-size: 0.98em;
+      margin-top:10px;
+      text-align:center;
     }
-    .highlight-game-section .game-link {
+    .game-link{
       color: #ffe066;
-      font-weight: bold;
-      text-decoration: underline;
-      margin-top: 4px;
-      font-size: 1.11em;
+      font-weight:700;
+      text-decoration:underline;
+      margin-top:8px;
+      display:inline-block;
     }
-    /* Responsive */
-    @media (max-width: 600px) {
-      .highlight-game-section {
-        max-width: 98vw;
-        padding: 18px 2vw;
-      }
-      .highlight-game-section .itch-iframe {
-        width: 99vw !important;
-        min-width: 0;
-        max-width: 98vw;
-      }
+
+    main{ max-width:1200px; margin: 18px auto 80px; padding:0 18px; z-index:10; position:relative; }
+
+    .glass{
+      background: var(--glass-bg);
+      box-shadow: 0 8px 34px rgba(2,6,20,0.6);
+      backdrop-filter: blur(6px);
+      padding:18px;
+      border-radius:14px;
+      margin-bottom:18px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .about-double{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start; }
+    .about-panel h2{ margin-top:0; }
+    .about-list{ margin:8px 0 0 0; padding-left:18px; }
+    .subtle{ color: #cbd9ffcc; font-size:0.95rem; }
+
+    .skills-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    .skill-card{
+      padding:12px;
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.007));
+      border:1px solid rgba(255,255,255,0.02);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-start;
+      font-weight:600;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .skill-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(6,8,20,0.6); }
+
+    .featured-projects-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .project-card{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:12px;
+      transition: transform .24s cubic-bezier(.2,.9,.3,1), box-shadow .24s;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));
+      border:1px solid rgba(255,255,255,0.02);
+      overflow:hidden;
+    }
+    .project-card:hover{ transform: translateY(-8px) scale(1.01); box-shadow: 0 18px 56px rgba(2,6,20,0.6); }
+    .project-img{
+      width:100px;
+      height:100px;
+      object-fit:cover;
+      border-radius:8px;
+      flex:0 0 100px;
+      box-shadow: 0 6px 20px rgba(2,6,20,0.5);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .project-card h3{ margin:0 0 6px 0; font-size:1.04rem; display:flex; gap:8px; align-items:center; }
+    .btn-small{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      margin-top:8px;
+      background: linear-gradient(90deg,var(--accent-1),#7f53ac);
+      padding:8px 10px;
+      color:#fff;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:0.9rem;
+    }
+
+    .contact-cards{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:10px; }
+    .contact-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border-radius:10px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    footer{ text-align:center; padding:20px 12px; color:#c8d8ff77; font-size:0.95rem; }
+
+    /* animated reveal helpers */
+    .animated{ opacity:0; transform: translateY(12px); transition: all .6s cubic-bezier(.2,.9,.3,1); }
+    .animated.visible{ opacity:1; transform:none; }
+
+    /* Responsive tweaks */
+    @media (max-width:900px){
+      .about-double{ grid-template-columns: 1fr; }
+      .intro{ flex-direction:column; align-items:flex-start; }
+      .avatar-glow{ margin-bottom:6px; }
+    }
+    @media (max-width:600px){
+      nav{ padding:10px; }
+      .avatar-glow{ width:110px; height:110px; flex:0 0 110px; }
+      .game-cover{ width:120px; height:160px; flex:0 0 120px; }
+      .itch-iframe{ min-width: 100%; }
     }
   </style>
 </head>
@@ -87,7 +389,7 @@
   <nav>
     <div class="logo-glow">
       Kudakwashe G Mazikana
-      <span class="alias">/ Kufrashe</span>
+      <span class="alias" style="font-weight:500;font-size:0.95rem;color:rgba(255,255,255,0.85);margin-left:8px;">/ Kufrashe</span>
       <span class="pulse-dot"></span>
     </div>
     <ul>
@@ -97,42 +399,52 @@
       <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
     </ul>
   </nav>
+
   <header class="main-header">
     <div class="intro animated fadeInDown">
       <div class="avatar-glow">
-        <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/kufrashe-logo.png?width=150" alt="Kufrashe Logo" class="avatar">
+        <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/kufrashe-logo.png?width=150" alt="Kufrashe Logo" class="avatar" loading="lazy" decoding="async">
       </div>
-      <h1>Kudakwashe G Mazikana <span class="aka">(aka Kufrashe)</span></h1>
-      <h2>Software Engineer, Game Developer & Founder</h2>
-      <div class="typewriter">
-        <span id="typewriter-text"></span>
-        <span class="blinker">|</span>
-      </div>
-      <p>
-        Building world-class software, games, and digital experiences as <strong>Kufrashe</strong>.<br>
-        <span class="subtle">Passionate about technology, creativity, and empowering users through code.</span>
-      </p>
-      <div class="intro-buttons">
-        <a href="#projects" class="cta-btn"><i class="fa-solid fa-gamepad"></i> Explore My Work</a>
-        <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="cta-btn secondary"><i class="fa-solid fa-globe"></i> Company Site</a>
+      <div style="flex:1;">
+        <h1>Kudakwashe G Mazikana <span class="aka" style="font-weight:600;font-size:0.9rem;color:#dbe7ffcc;">(aka Kufrashe)</span></h1>
+        <h2>Software Engineer, Game Developer & Founder</h2>
+        <div class="typewriter">
+          <span id="typewriter-text"></span>
+          <span class="blinker">|</span>
+        </div>
+        <p style="margin:6px 0 8px 0;">
+          Building world-class software, games, and digital experiences as <strong>Kufrashe</strong>.<br>
+          <span class="subtle">Passionate about technology, creativity, and empowering users through code.</span>
+        </p>
+        <div class="intro-buttons">
+          <a href="#projects" class="cta-btn"><i class="fa-solid fa-gamepad"></i> Explore My Work</a>
+          <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="cta-btn secondary"><i class="fa-solid fa-globe"></i> Company Site</a>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- PROMINENT FEATURED GAME SECTION -->
-  <section class="highlight-game-section animated fadeInDown" style="margin-top:32px;">
-    <h2><i class="fa-brands fa-itch-io"></i> Play: Catch Em Things <span class="tag" style="background:#ffe066;color:#333;padding:3px 10px;border-radius:7px;font-size:0.75em;letter-spacing:0.5px;margin-left:10px;">Featured</span></h2>
-    <div class="itch-iframe" style="width:554px;max-width:100%;">
-      <iframe frameborder="0"
-        src="https://itch.io/embed/3741666?linkback=true&amp;border_width=2&amp;bg_color=0d0d2b&amp;fg_color=f0f0f0&amp;border_color=2a3efa"
-        width="554" height="169"
-        allowfullscreen
-        title="Catch Em Things by Kufrashe"
-        loading="lazy"
-        style="width:100%;border:none;min-width:240px;background:#0d0d2b;">
-        <a href="https://kufrashe.itch.io/catch-em-things">Catch Em Things by Kufrashe</a>
-      </iframe>
+  <section class="highlight-game-section animated fadeInDown" style="margin-top:8px;">
+    <h2><i class="fa-brands fa-itch-io"></i> Play: Catch Em Things <span class="tag" style="background:#ffe066;color:#333;padding:4px 10px;border-radius:8px;font-size:0.74em;letter-spacing:0.5px;margin-left:8px;">Featured</span></h2>
+
+    <div class="game-art-wrap">
+      <!-- cover art provided by user (catch-em-things) -->
+      <div class="game-cover" role="img" aria-label="Catch Em Things cover" style="background-image:url('https://img.itch.zone/aW1nLzIyMjY5ODM0LnBuZw==/original/5nsg8z.png');"></div>
+
+      <div class="itch-iframe" style="min-width:300px;max-width:520px;">
+        <iframe frameborder="0"
+          src="https://itch.io/embed/3741666?linkback=true&amp;border_width=2&amp;bg_color=0d0d2b&amp;fg_color=f0f0f0&amp;border_color=2a3efa"
+          width="100%" height="192"
+          allowfullscreen
+          title="Catch Em Things by Kufrashe"
+          loading="lazy"
+          style="width:100%;border:none;min-width:240px;background:#0d0d2b;">
+          <a href="https://kufrashe.itch.io/catch-em-things">Catch Em Things by Kufrashe</a>
+        </iframe>
+      </div>
     </div>
+
     <div class="game-info">
       <strong>Catch Em Things</strong> is a vibrant, fast-paced arcade game by Kufrashe.<br>
       <b>Genre:</b> Arcade, Action &bull; <b>Platform:</b> Windows/Web<br>
@@ -149,7 +461,7 @@
       <div class="about-panel">
         <h2><i class="fa-solid fa-user"></i> About Kudakwashe</h2>
         <p>
-          <b>Kudakwashe G Mazikana</b> is a software engineer, student at Telone Center for Learning (Diploma in Software Engineering), and the founder of Kufrashe Technologies. Based in Harare, Zimba[...]
+          <b>Kudakwashe G Mazikana</b> is a software engineer, student at Telone Center for Learning (Diploma in Software Engineering), and the founder of Kufrashe Technologies. Based in Harare, Zimbabwe, he builds games and platforms that aim to delight and inspire.
         </p>
         <ul class="about-list">
           <li><b>🎓 Education:</b> Telone Center for Learning</li>
@@ -160,7 +472,7 @@
       <div class="about-panel">
         <h2><i class="fa-solid fa-gamepad"></i> About Kufrashe</h2>
         <p>
-          <b>Kufrashe</b> is my creative and indie tech identity. Under this brand, I build games, tools, and digital art—exploring the playful, experimental side of technology. My indie games, such[...]
+          <b>Kufrashe</b> is my creative and indie tech identity. Under this brand, I build games, tools, and digital art—exploring the playful, experimental side of technology. My indie games, tools, and experiments are built with a focus on feel and user delight.
         </p>
         <ul class="about-list">
           <li><b>🎮 Indie Studio:</b> Kufrashe Technologies (2018–Present)</li>
@@ -199,43 +511,47 @@
       <h2><i class="fa-solid fa-folder-open"></i> Featured Projects & Products</h2>
       <div class="featured-projects-grid">
         <div class="project-card project-magnetic">
-          <img src="https://img.itch.zone/aW1nLzE0NzI3NDI4LmpwZw==/315x250%23c/8gJr%2B4.jpg" alt="MAGNETIC-The Game Cover" class="project-img">
+          <img src="https://img.itch.zone/aW1nLzE3MTc5NzI3LnBuZw==/347x500/t3lSco.png" alt="MAGNETIC-The Game Cover" class="project-img" loading="lazy" decoding="async">
           <div>
-            <h3><i class="fa-solid fa-magnet"></i> MAGNETIC-The Game <span class="tag">Open Beta</span></h3>
-            <p>
-              A 2D action-survival indie game with unique mouse-based movement and dynamic encounters. <br>
-              <b>Platforms:</b> Windows<br>
+            <h3><i class="fa-solid fa-magnet"></i> MAGNETIC — The Game <span class="tag" style="background:#ffe066;color:#333;padding:3px 8px;border-radius:7px;font-size:0.72em;margin-left:6px;">Open Beta</span></h3>
+            <p style="margin:6px 0 0 0;">
+              A 2D action-survival indie game with unique mouse-based movement and dynamic encounters.
+              <br><b>Platforms:</b> Windows<br>
               <b>Made with:</b> Godot, GIMP, LMMS<br>
-              <b>Tags:</b> 2D, Action, Survival, Singleplayer<br>
-              <a href="https://kufrashe.itch.io/magnetic-the-game" target="_blank" class="btn-small"><i class="fa-brands fa-itch-io"></i> Play Now on itch.io</a>
+              <b>Tags:</b> 2D, Action, Survival, Singleplayer
             </p>
+            <a href="https://kufrashe.itch.io/magnetic-the-game" target="_blank" class="btn-small"><i class="fa-brands fa-itch-io"></i> Play Now on itch.io</a>
           </div>
         </div>
+
         <div class="project-card">
-          <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/controller.png?width=150" alt="Ultimate Theft Simulator" class="project-img">
+          <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&q=60" alt="Connekt — Social Media Platform" class="project-img" loading="lazy" decoding="async">
           <div>
-            <h3><i class="fa-solid fa-car"></i> Ultimate Theft Simulator 1</h3>
-            <p>
-              Ambitious open-world theft simulation game with dynamic AI.<br>
-              <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="btn-small">View on Company Site</a>
+            <h3><i class="fa-solid fa-users"></i> Connekt — Social Media Platform</h3>
+            <p style="margin:6px 0 0 0;">
+              Scalable, user-friendly network with modern UI/UX and robust backend. Designed for communities and creators.
             </p>
+            <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="btn-small">View on Company Site</a>
           </div>
         </div>
+
         <div class="project-card">
-          <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/apps.png?width=150" alt="Social Media Platform" class="project-img">
-          <div>
-            <h3><i class="fa-solid fa-users"></i> Social Media Platform</h3>
-            <p>
-              Scalable, user-friendly network with modern UI/UX and robust backend.
-            </p>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/python.png?width=150" alt="Programming Helper" class="project-img">
+          <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_1000,w_500,f_auto,q_auto/13243399/517773_624572.jpeg" alt="Programming Helper" class="project-img" loading="lazy" decoding="async">
           <div>
             <h3><i class="fa-solid fa-brain"></i> Programming Helper</h3>
-            <p>
-              Tools and helpers for Python & AI, open source on <a href="https://github.com/Kufrashe/Programming" target="_blank">GitHub</a>.
+            <p style="margin:6px 0 0 0;">
+              Tools and helpers for Python & AI, open source on <a href="https://github.com/Kufrashe/Programming" target="_blank">GitHub</a>. Utilities, snippets, and small libraries for faster prototyping.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/controller.png?width=150" alt="Ultimate Theft Simulator" class="project-img" loading="lazy" decoding="async">
+          <div>
+            <h3><i class="fa-solid fa-car"></i> Ultimate Theft Simulator 1</h3>
+            <p style="margin:6px 0 0 0;">
+              Ambitious open-world theft simulation game with dynamic AI.<br>
+              <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="btn-small">View on Company Site</a>
             </p>
           </div>
         </div>
@@ -282,9 +598,11 @@
       </div>
     </section>
   </main>
+
   <footer>
     <p>&copy; 2025 Kudakwashe G Mazikana & Kufrashe. All rights reserved. | <a href="https://github.com/Kufrashe" target="_blank">GitHub</a></p>
   </footer>
+
   <script>
     // Typewriter effect for multi-role (kept as is, but reduced random delay)
     const roles = [
@@ -335,7 +653,7 @@
       this.length = 20 + Math.random() * 60;
       this.angle = Math.random() * Math.PI * 2;
       this.speed = 0.5 + Math.random();
-      this.alpha = 0.1 + Math.random() * 0.2;
+      this.alpha = 0.06 + Math.random() * 0.18;
       this.color = ["#eebbc3", "#7f53ac", "#fe8c00", "#647dee"][Math.floor(Math.random() * 4)];
       this.draw = function() {
         ctx.save();
@@ -355,8 +673,8 @@
         this.x += Math.cos(this.angle) * this.speed;
         this.y += Math.sin(this.angle) * this.speed;
         if (
-          this.x < 0 || this.x > canvas.width ||
-          this.y < 0 || this.y > canvas.height
+          this.x < -100 || this.x > canvas.width + 100 ||
+          this.y < -100 || this.y > canvas.height + 100
         ) {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
@@ -373,7 +691,7 @@
     }
     function initParticles() {
       particles = [];
-      const numParticles = window.innerWidth < 600 ? 18 : 32; // fewer for perf
+      const numParticles = window.innerWidth < 600 ? 16 : 28; // fewer for perf
       for(let i=0; i<numParticles; i++) particles.push(new Particle());
     }
     window.addEventListener('resize', () => {resizeCanvas();initParticles();});
@@ -398,6 +716,9 @@
       img.setAttribute('loading', 'lazy');
       img.decoding = 'async';
     });
+
+    // Small accessibility: make game-cover reachable
+    document.querySelectorAll('.game-cover').forEach(el => el.setAttribute('tabindex','0'));
   </script>
 </body>
 </html>
