@@ -1,724 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kudakwashe G Mazikana | Kufrashe Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio of Kudakwashe G Mazikana (Kufrashe) - Software Engineer, Game Developer, Founder.">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/4f3b0bfa0c.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Kufrashe | Digital Architect & Game Engineer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kudakwashe G Mazikana (Kufrashe) - Software Engineer, Game Developer, and Founder. Architecting scalable systems and immersive digital worlds.">
+    <meta name="keywords" content="Kufrashe, Kudakwashe Mazikana, Game Developer, Software Engineer, Full Stack Developer, Godot Developer, Harare Zimbabwe">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4f3b0bfa0c.js" crossorigin="anonymous"></script>
 
-  <style>
-    :root{
-      --bg-1:#0b1020;
-      --bg-2:#0d0d2b;
-      --accent-1:#2a3efa;
-      --accent-2:#eebbc3;
-      --muted:#cfd7ff33;
-      --glass-bg: rgba(20,20,40,0.7);
-    }
+    <style>
+        /* CSS Variables - Futuristic/Cyberpunk Palette */
+        :root{
+            --bg-dark: #070914; /* Deep, solid background */
+            --bg-accent: #0f1225; /* Subtle separation */
+            --accent-primary: #00e5ff; /* Cyan/Tron Blue */
+            --accent-secondary: #ff33c4; /* Magenta/Pink */
+            --text-main: #f0f8ff;
+            --text-muted: #a3b3c9; /* Lighter mute for better readability */
+            --glass-bg: rgba(22, 25, 48, 0.75); /* Frosted Blue Glass */
+            --border-glow: rgba(0, 229, 255, 0.3);
+        }
 
-    /* Page background animated gradient */
-    body{
-      margin:0;
-      font-family: 'Roboto', sans-serif;
-      color:#e9eefb;
-      background: radial-gradient(1200px 700px at 10% 10%, rgba(46,56,242,0.12), transparent 10%),
-                  radial-gradient(900px 500px at 90% 90%, rgba(238,187,195,0.08), transparent 10%),
-                  linear-gradient(180deg, var(--bg-1), var(--bg-2) 60%);
-      min-height:100vh;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x: hidden;
-    }
+        /* --- BASE STYLES --- */
+        body{
+            margin:0; font-family: 'Space Mono', monospace; color: var(--text-main);
+            background-color: var(--bg-dark);
+            min-height:100vh;
+            /* Original Gradient Background retained for the legendary aesthetic */
+            background-image: radial-gradient(circle at 10% 10%, rgba(0, 229, 255, 0.08), transparent 40%),
+                              radial-gradient(circle at 90% 90%, rgba(255, 51, 196, 0.06), transparent 40%);
+            -webkit-font-smoothing:antialiased;
+            overflow-x: hidden;
+        }
+        h2{
+            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.8rem;
+            color: var(--accent-primary); margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+            text-transform: uppercase;
+        }
 
-    /* subtle animated noise overlay */
-    .animated-bg{
-      pointer-events:none;
-      position:fixed;
-      inset:0;
-      background-image: radial-gradient(white 1px, transparent 1px);
-      background-size: 30px 30px;
-      opacity: 0.02;
-      mix-blend-mode: overlay;
-      z-index:0;
-      animation: drift 30s linear infinite;
-    }
-    @keyframes drift {
-      from { transform: translateY(0) translateX(0); }
-      to { transform: translateY(-40px) translateX(40px); }
-    }
+        /* --- ENHANCED READABILITY (Non-Tech Savvy Friendly) --- */
+        .mission-control p, .artifact-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem; /* Slightly larger text */
+            line-height: 1.7; /* Increased line spacing for easier scanning */
+        }
 
-    nav{
-      position:sticky;
-      top:12px;
-      z-index:60;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:12px 20px;
-      max-width:1200px;
-      margin:0 auto;
-    }
-    .logo-glow{
-      font-weight:700;
-      font-family:'Montserrat',sans-serif;
-      color:#fff;
-      background: linear-gradient(90deg,var(--accent-1),#7f53ac 60%,var(--accent-2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color: transparent;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      position:relative;
-    }
-    .logo-glow .pulse-dot{
-      width:10px;height:10px;border-radius:50%;
-      background:var(--accent-1);
-      box-shadow:0 0 18px rgba(42,62,250,0.8);
-      margin-left:6px;
-    }
-    nav ul{
-      display:flex;
-      gap:10px;
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-    nav a{
-      color: #dfe8ff;
-      text-decoration:none;
-      padding:8px 12px;
-      border-radius:8px;
-      transition: all .18s ease;
-      font-weight:500;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:0.95rem;
-    }
-    nav a:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(20,20,40,0.28);
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    }
+        /* --- GLASS EFFECT CONTAINER (Dashboard Panels) --- */
+        .glass-panel{
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding:25px;
+            border-radius:15px;
+            margin-bottom:20px;
+            border:1px solid var(--border-glow);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.08), 0 8px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .glass-panel:hover{
+             /* Subtle lift and glow on hover */
+             transform: translateY(-2px);
+             box-shadow: 0 0 30px rgba(0, 229, 255, 0.15), 0 12px 40px rgba(0,0,0,0.7);
+        }
+        main{ max-width:1400px; margin: 30px auto 80px; padding:0 20px; z-index:10; position:relative; }
 
-    header.main-header{
-      max-width:1100px;
-      margin:14px auto 22px;
-      position:relative;
-      z-index:10;
-      padding:24px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-    .intro{
-      display:flex;
-      gap:22px;
-      align-items:center;
-      width:100%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:28px;
-      border-radius:18px;
-      box-shadow: 0 8px 48px rgba(6,8,20,0.6);
-      border:1px solid rgba(255,255,255,0.03);
-      position:relative;
-      overflow:hidden;
-    }
+        /* --- NAVIGATION --- */
+        nav{
+            position:sticky; top:15px; z-index:100; max-width:1400px; margin:0 auto; padding: 10px 20px;
+            display:flex; justify-content:space-between; align-items:center;
+            background: rgba(13, 16, 36, 0.9); border-radius:12px;
+            border-bottom: 2px solid var(--accent-primary);
+            flex-wrap: wrap; /* Keeps mobile layout clean (your tweak!) */
+        }
+        .logo-glow{
+            font-family:'Montserrat',sans-serif; font-weight:900; font-size: 1.2rem;
+            color: #fff; text-shadow: 0 0 10px var(--accent-primary);
+        }
+        nav ul{ display:flex; list-style:none; gap: 25px; margin:0; padding:0; }
+        nav a{
+            color: var(--accent-primary); text-decoration:none; padding:8px 0; font-weight:700;
+            position:relative; transition: color 0.2s;
+        }
+        nav a:after{ content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px;
+            background:var(--accent-secondary); transition: width 0.3s ease-out;
+        }
+        nav a:hover{ color: var(--text-main); }
+        nav a:hover:after{ width:100%; }
 
-    .avatar-glow{
-      width:140px;
-      height:140px;
-      border-radius:18px;
-      flex:0 0 140px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background: linear-gradient(135deg, rgba(42,62,250,0.15), rgba(238,187,195,0.08));
-      padding:8px;
-      transition: transform .45s cubic-bezier(.2,.9,.3,1);
-    }
-    .avatar-glow:hover{ transform: translateY(-6px) rotate(-2deg) scale(1.02); }
-    .avatar{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      border-radius:12px;
-      display:block;
-      filter: drop-shadow(0 8px 22px rgba(0,0,0,0.45));
-      background: rgba(0,0,0,0.12);
-      padding:6px;
-    }
+        /* --- HERO: MISSION CONTROL --- */
+        .hero-grid{
+            display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px;
+        }
+        .mission-control{
+            border-left: 5px solid var(--accent-secondary);
+            padding-left: 30px;
+        }
+        .mission-control h1{
+            font-family:'Montserrat',sans-serif; font-weight:900; font-size: 3.5rem; margin: 0 0 8px 0;
+            line-height: 1.1; color: var(--accent-primary);
+            background: linear-gradient(45deg, var(--accent-primary), #fff, var(--accent-secondary));
+            -webkit-background-clip:text; -webkit-text-fill-color: transparent;
+        }
+        .mission-control h3{
+            color: var(--text-main); font-size: 1.2rem; margin: 0 0 20px 0; font-weight: 400;
+        }
+        .mission-links a{
+            background: var(--accent-secondary); color: var(--bg-dark); padding: 12px 20px;
+            border-radius: 8px; font-weight: 700; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px; margin-right: 15px;
+            box-shadow: 0 0 15px rgba(255, 51, 196, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .mission-links a:hover{ transform: translateY(-4px); box-shadow: 0 0 25px rgba(255, 51, 196, 0.8); }
 
-    .intro h1{
-      margin:0;
-      font-family:'Montserrat',sans-serif;
-      font-size:1.6rem;
-      letter-spacing:0.6px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .intro h2{
-      margin:6px 0 12px 0;
-      font-weight:500;
-      color:#dbe7ff;
-      font-size:1rem;
-    }
-    .typewriter{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-weight:600;
-      color:#fff;
-      margin-bottom:10px;
-    }
-    .blinker{ opacity:0.85; color:var(--accent-2); }
+        /* --- ID CARD / AVATAR --- */
+        .id-card{
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(255, 51, 196, 0.1));
+            border-radius: 15px; padding: 20px; text-align: center;
+            border: 1px solid var(--accent-primary);
+        }
+        .avatar-frame{
+            width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 15px;
+            background: var(--accent-primary); padding: 5px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+        }
+        .id-card img{ width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
-    .intro-buttons{ display:flex; gap:10px; margin-top:6px; flex-wrap:wrap; }
-    .cta-btn{
-      background: linear-gradient(90deg,var(--accent-1),#7f53ac);
-      color:#0d0d2b;
-      padding:10px 14px;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:700;
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      box-shadow: 0 8px 30px rgba(42,62,250,0.12);
-      transition: transform .16s ease, box-shadow .16s ease;
-    }
-    .cta-btn.secondary{
-      background: transparent;
-      color:#dfe8ff;
-      border:1px solid rgba(255,255,255,0.04);
-      font-weight:600;
-    }
-    .cta-btn:hover{ transform: translateY(-4px); }
+        /* --- SKILLS MATRIX --- */
+        .skills-matrix-grid{
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            margin-top: 20px;
+        }
+        .skill-group{
+            padding: 15px; border-radius: 10px;
+            border: 1px dashed var(--text-muted);
+            background: var(--bg-accent);
+        }
+        .skill-group h3{
+            color: var(--accent-secondary); margin: 0 0 10px 0; font-size: 1.1rem;
+            display: flex; align-items: center; gap: 8px; font-weight: 700;
+        }
+        .skill-tag{
+            display: inline-block; padding: 5px 10px; margin: 4px;
+            background: rgba(0, 229, 255, 0.1); color: var(--accent-primary);
+            border-radius: 4px; font-size: 0.85rem;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
 
-    /* PROMINENT FEATURED GAME SECTION */
-    .highlight-game-section {
-      max-width: 760px;
-      margin: 22px auto 30px;
-      padding: 20px;
-      border-radius: 18px;
-      box-shadow: 0 10px 48px rgba(2,4,20,0.7);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 2;
-      position: relative;
-      border: 1px solid rgba(255,255,255,0.04);
-      background: linear-gradient(135deg, rgba(42,62,250,0.12) 10%, rgba(238,187,195,0.06) 100%);
-      overflow:visible;
-    }
-    .highlight-game-section h2 {
-      margin-top: 0;
-      font-size: 1.6em;
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      letter-spacing: 0.6px;
-      margin-bottom: 12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+        /* --- FEATURED PROJECT / ARTIFACTS --- */
+        .artifact-grid{
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .artifact-card{
+            padding: 20px; border-radius: 15px;
+            border: 1px solid var(--accent-secondary);
+            background: linear-gradient(180deg, rgba(255, 51, 196, 0.08), rgba(255, 51, 196, 0.03));
+        }
+        
+        /* CATCH EM THINGS: FEATURED STYLING */
+        .featured-artifact {
+            border: 2px solid var(--accent-primary);
+            background: linear-gradient(180deg, rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.05));
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+        }
+        .featured-artifact h3 {
+             color: var(--accent-primary);
+        }
+        
+        .artifact-card h3{
+            color: var(--accent-secondary); margin: 0 0 10px 0; font-size: 1.3rem;
+        }
+        .artifact-card img{
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+            /* IMAGE CLAMPING: Ensures images are sharp and don't stretch the layout */
+            max-height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        .project-meta-data{ font-size: 0.9rem; margin-top: 10px; color: var(--text-main); }
+        .project-meta-data strong{ color: var(--accent-primary); }
 
-    .game-art-wrap{
-      width:100%;
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:12px;
-      flex-wrap:wrap;
-    }
-    .game-cover{
-      width:170px;
-      height:220px;
-      border-radius:12px;
-      overflow:hidden;
-      flex:0 0 170px;
-      box-shadow: 0 10px 36px rgba(2,6,20,0.7);
-      border:1px solid rgba(255,255,255,0.03);
-      background-size:cover;
-      background-position:center;
-      transition: transform .25s cubic-bezier(.2,.9,.3,1);
-    }
-    .game-cover:hover{ transform: translateY(-8px) scale(1.03); }
-    .itch-iframe {
-      flex:1 1 420px;
-      min-width:260px;
-      border-radius:10px;
-      box-shadow: 0 6px 28px rgba(2,6,20,0.6);
-      border: 1px solid rgba(255,255,255,0.04);
-      background: #0d0d2b;
-      overflow: hidden;
-    }
-    .game-info{
-      color: #f0f0f0;
-      font-size: 0.98em;
-      margin-top:10px;
-      text-align:center;
-    }
-    .game-link{
-      color: #ffe066;
-      font-weight:700;
-      text-decoration:underline;
-      margin-top:8px;
-      display:inline-block;
-    }
+        /* --- NEW: PROJECT LINK STYLING (The high-impact polish) --- */
+        .artifact-link {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-top: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 5px;
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            border: 1px solid currentColor;
+        }
+        /* Featured Link Style */
+        .featured-artifact .artifact-link {
+            color: var(--bg-dark); /* Dark text on bright background */
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+        .featured-artifact .artifact-link:hover {
+            background: var(--accent-secondary);
+            border-color: var(--accent-secondary);
+            color: var(--bg-dark);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 51, 196, 0.8);
+        }
+        /* Standard Link Style */
+        .artifact-card:not(.featured-artifact) .artifact-link {
+            color: var(--accent-secondary);
+            background: transparent;
+        }
+        .artifact-card:not(.featured-artifact) .artifact-link:hover {
+            color: var(--bg-dark);
+            background: var(--accent-secondary);
+            transform: scale(1.02);
+        }
 
-    main{ max-width:1200px; margin: 18px auto 80px; padding:0 18px; z-index:10; position:relative; }
+        /* --- CONTACT / TERMINAL --- */
+        .terminal-output{
+            background: var(--bg-dark); border: 1px solid var(--accent-primary);
+            padding: 20px; border-radius: 10px; white-space: pre-wrap;
+            color: #00ff00; /* Classic green text */
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        .terminal-output a{ color: var(--accent-primary); text-decoration: none; }
+        .terminal-output a:hover{ text-decoration: underline; }
 
-    .glass{
-      background: var(--glass-bg);
-      box-shadow: 0 8px 34px rgba(2,6,20,0.6);
-      backdrop-filter: blur(6px);
-      padding:18px;
-      border-radius:14px;
-      margin-bottom:18px;
-      border:1px solid rgba(255,255,255,0.03);
-    }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1000px) {
+            .hero-grid{ grid-template-columns: 1fr; }
+            .mission-control{ padding-left: 0; border-left: none; border-bottom: 5px solid var(--accent-secondary); padding-bottom: 20px;}
+            .mission-control h1{ font-size: 2.5rem; }
+            .skills-matrix-grid{ grid-template-columns: 1fr; }
+        }
+        
+        .skill-tag {
+          animation: fadeIn 0.6s ease both;
+        }
+        @keyframes fadeIn {
+          from {opacity: 0; transform: translateY(5px);}
+          to {opacity: 1; transform: translateY(0);}
+        }
+        .terminal-output::after {
+          content: '▮';
+          animation: blink 1s infinite;
+        }
+        @keyframes blink {
+          50% { opacity: 0; }
+        }
 
-    .about-double{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start; }
-    .about-panel h2{ margin-top:0; }
-    .about-list{ margin:8px 0 0 0; padding-left:18px; }
-    .subtle{ color: #cbd9ffcc; font-size:0.95rem; }
-
-    .skills-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-      gap:10px;
-      margin-top:10px;
-    }
-    .skill-card{
-      padding:12px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.007));
-      border:1px solid rgba(255,255,255,0.02);
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:flex-start;
-      font-weight:600;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .skill-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(6,8,20,0.6); }
-
-    .featured-projects-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap:14px;
-      margin-top:12px;
-    }
-    .project-card{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:12px;
-      border-radius:12px;
-      transition: transform .24s cubic-bezier(.2,.9,.3,1), box-shadow .24s;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));
-      border:1px solid rgba(255,255,255,0.02);
-      overflow:hidden;
-    }
-    .project-card:hover{ transform: translateY(-8px) scale(1.01); box-shadow: 0 18px 56px rgba(2,6,20,0.6); }
-    .project-img{
-      width:100px;
-      height:100px;
-      object-fit:cover;
-      border-radius:8px;
-      flex:0 0 100px;
-      box-shadow: 0 6px 20px rgba(2,6,20,0.5);
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-    .project-card h3{ margin:0 0 6px 0; font-size:1.04rem; display:flex; gap:8px; align-items:center; }
-    .btn-small{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      margin-top:8px;
-      background: linear-gradient(90deg,var(--accent-1),#7f53ac);
-      padding:8px 10px;
-      color:#fff;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-      font-size:0.9rem;
-    }
-
-    .contact-cards{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:10px; }
-    .contact-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
-      border-radius:10px;
-      padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    footer{ text-align:center; padding:20px 12px; color:#c8d8ff77; font-size:0.95rem; }
-
-    /* animated reveal helpers */
-    .animated{ opacity:0; transform: translateY(12px); transition: all .6s cubic-bezier(.2,.9,.3,1); }
-    .animated.visible{ opacity:1; transform:none; }
-
-    /* Responsive tweaks */
-    @media (max-width:900px){
-      .about-double{ grid-template-columns: 1fr; }
-      .intro{ flex-direction:column; align-items:flex-start; }
-      .avatar-glow{ margin-bottom:6px; }
-    }
-    @media (max-width:600px){
-      nav{ padding:10px; }
-      .avatar-glow{ width:110px; height:110px; flex:0 0 110px; }
-      .game-cover{ width:120px; height:160px; flex:0 0 120px; }
-      .itch-iframe{ min-width: 100%; }
-    }
-  </style>
+    </style>
 </head>
 <body>
-  <canvas id="tech-bg"></canvas>
-  <div class="animated-bg"></div>
-  <nav>
-    <div class="logo-glow">
-      Kudakwashe G Mazikana
-      <span class="alias" style="font-weight:500;font-size:0.95rem;color:rgba(255,255,255,0.85);margin-left:8px;">/ Kufrashe</span>
-      <span class="pulse-dot"></span>
-    </div>
-    <ul>
-      <li><a href="#about"><i class="fa-solid fa-user"></i> About</a></li>
-      <li><a href="#skills"><i class="fa-solid fa-laptop-code"></i> Skills</a></li>
-      <li><a href="#projects"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
-      <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-    </ul>
-  </nav>
-
-  <header class="main-header">
-    <div class="intro animated fadeInDown">
-      <div class="avatar-glow">
-        <img src="Kufrashe_Tech_LinkedIn_BannerImg%20(1).png" width=150 alt="Kufrashe Logo" class="avatar" loading="lazy" decoding="async">
-      </div>
-      <div style="flex:1;">
-        <h1>Kudakwashe G Mazikana <span class="aka" style="font-weight:600;font-size:0.9rem;color:#dbe7ffcc;">(aka Kufrashe)</span></h1>
-        <h2>Software Engineer, Game Developer & Founder</h2>
-        <div class="typewriter">
-          <span id="typewriter-text"></span>
-          <span class="blinker">|</span>
+    <nav>
+        <div class="logo-glow">
+            Kufrashe.io // DIGITAL ARCHITECT
         </div>
-        <p style="margin:6px 0 8px 0;">
-          Building world-class software, games, and digital experiences as <strong>Kufrashe</strong>.<br>
-          <span class="subtle">Passionate about technology, creativity, and empowering users through code.</span>
-        </p>
-        <div class="intro-buttons">
-          <a href="#projects" class="cta-btn"><i class="fa-solid fa-gamepad"></i> Explore My Work</a>
-          <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="cta-btn secondary"><i class="fa-solid fa-globe"></i> Company Site</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- PROMINENT FEATURED GAME SECTION -->
-  <section class="highlight-game-section animated fadeInDown" style="margin-top:8px;">
-    <h2><i class="fa-brands fa-itch-io"></i> Play: Catch Em Things <span class="tag" style="background:#ffe066;color:#333;padding:4px 10px;border-radius:8px;font-size:0.74em;letter-spacing:0.5px;margin-left:8px;">Featured</span></h2>
-
-    <div class="game-art-wrap">
-      <!-- cover art provided by user (catch-em-things) -->
-      <div class="game-cover" role="img" aria-label="Catch Em Things cover" style="background-image:url('https://img.itch.zone/aW1nLzIyMjY5ODM0LnBuZw==/original/5nsg8z.png');"></div>
-
-      <div class="itch-iframe" style="min-width:300px;max-width:520px;">
-        <iframe frameborder="0"
-          src="https://itch.io/embed/3741666?linkback=true&amp;border_width=2&amp;bg_color=0d0d2b&amp;fg_color=f0f0f0&amp;border_color=2a3efa"
-          width="100%" height="192"
-          allowfullscreen
-          title="Catch Em Things by Kufrashe"
-          loading="lazy"
-          style="width:100%;border:none;min-width:240px;background:#0d0d2b;">
-          <a href="https://kufrashe.itch.io/catch-em-things">Catch Em Things by Kufrashe</a>
-        </iframe>
-      </div>
-    </div>
-
-    <div class="game-info">
-      <strong>Catch Em Things</strong> is a vibrant, fast-paced arcade game by Kufrashe.<br>
-      <b>Genre:</b> Arcade, Action &bull; <b>Platform:</b> Windows/Web<br>
-      <b>Goal:</b> Catch as many falling objects as you can—beat your high score!
-    </div>
-    <a class="game-link" href="https://kufrashe.itch.io/catch-em-things" target="_blank" rel="noopener">
-      View Game Page & Get More Info
-    </a>
-  </section>
-  <!-- END PROMINENT FEATURED GAME SECTION -->
-
-  <main>
-    <section id="about" class="glass animated fadeInLeft about-double">
-      <div class="about-panel">
-        <h2><i class="fa-solid fa-user"></i> About Kudakwashe</h2>
-        <p>
-          <b>Kudakwashe G Mazikana</b> is a software engineer, student at Telone Center for Learning (Diploma in Software Engineering), and the founder of Kufrashe Technologies. Based in Harare, Zimbabwe, he builds games and platforms that aim to delight and inspire.
-        </p>
-        <ul class="about-list">
-          <li><b>🎓 Education:</b> Telone Center for Learning</li>
-          <li><b>🌍 Location:</b> Harare, Zimbabwe</li>
-          <li><b>🚀 Focus:</b> Software Engineering, AI, SaaS, Web Platforms</li>
+        <ul>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#matrix">Matrix</a></li>
+            <li><a href="#artifacts">Artifacts</a></li>
+            <li><a href="#connect">Connect</a></li>
         </ul>
-      </div>
-      <div class="about-panel">
-        <h2><i class="fa-solid fa-gamepad"></i> About Kufrashe</h2>
-        <p>
-          <b>Kufrashe</b> is my creative and indie tech identity. Under this brand, I build games, tools, and digital art—exploring the playful, experimental side of technology. My indie games, tools, and experiments are built with a focus on feel and user delight.
-        </p>
-        <ul class="about-list">
-          <li><b>🎮 Indie Studio:</b> Kufrashe Technologies (2018–Present)</li>
-          <li><b>🖥️ Platforms:</b> Windows, Web, Mobile</li>
-          <li><b>🌐 Brand:</b> <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank">Kufrashe Technologies</a></li>
-        </ul>
-      </div>
-    </section>
+    </nav>
 
-    <section id="skills" class="glass animated fadeInRight">
-      <h2><i class="fa-solid fa-laptop-code"></i> Skills & Technologies</h2>
-      <div class="skills-grid">
-        <div class="skill-card highlight"><i class="fa-brands fa-unity"></i> Unity</div>
-        <div class="skill-card highlight"><i class="fa-brands fa-godot"></i> Godot</div>
-        <div class="skill-card"><i class="fa-solid fa-cube"></i> Unreal Engine</div>
-        <div class="skill-card"><i class="fa-solid fa-cube"></i> Shiva3D</div>
-        <div class="skill-card"><i class="fa-solid fa-cube"></i> Flax Engine</div>
-        <div class="skill-card"><i class="fa-solid fa-cube"></i> Unigine</div>
-        <div class="skill-card"><i class="fa-solid fa-cube"></i> Coppercube</div>
-        <div class="skill-card"><i class="fa-brands fa-python"></i> Python</div>
-        <div class="skill-card"><i class="fa-brands fa-js"></i> JavaScript</div>
-        <div class="skill-card"><i class="fa-brands fa-java"></i> Java</div>
-        <div class="skill-card"><i class="fa-solid fa-code"></i> C++ / C</div>
-        <div class="skill-card"><i class="fa-brands fa-microsoft"></i> C# / Visual Basic</div>
-        <div class="skill-card"><i class="fa-solid fa-terminal"></i> GDScript</div>
-        <div class="skill-card"><i class="fa-solid fa-database"></i> SQL & NoSQL DBs</div>
-        <div class="skill-card"><i class="fa-solid fa-cubes"></i> 3D Modeling (Blender, GIMP)</div>
-        <div class="skill-card"><i class="fa-solid fa-microchip"></i> Prompt Engineering & AI</div>
-        <div class="skill-card"><i class="fa-solid fa-rocket"></i> Indie Game Dev</div>
-        <div class="skill-card"><i class="fa-solid fa-globe"></i> Full Stack Web Dev</div>
-        <div class="skill-card"><i class="fa-solid fa-music"></i> Audio (LMMS, SFX)</div>
-      </div>
-    </section>
+    <main>
+        <section class="hero-grid">
+            <div class="glass-panel mission-control" id="mission">
+                <h1>Kudakwashe Mazikana (KUFRASHE)</h1>
+                <h3>> Software Engineer. Game Developer. Founder.</h3>
+                <p>
+                    I architect scalable software systems and design immersive digital worlds. My work is the intersection of **technical rigor (Python, Full Stack)** and **creative output (Godot, Unity)**. I don't just write code; I build platforms and experiences that challenge the status quo.
+                </p>
+                <div style="margin-top: 25px;" class="mission-links">
+                    <a href="https://github.com/Kufrashe" target="_blank"><i class="fa-brands fa-github"></i> ACCESS THE REPOSITORY</a>
+                    <a href="#artifacts"><i class="fa-solid fa-rocket"></i> VIEW SHIPPED ARTIFACTS</a>
+                </div>
+            </div>
+            <div class="glass-panel id-card">
+                <div class="avatar-frame">
+                    <img src="/content/uploaded:image_e5ecc1.jpg-c3978032-b020-44aa-b7a4-0766904b2f72" alt="Kufrashe Profile Image">
+                </div>
+                <div style="font-size: 0.9rem; color: var(--accent-primary);">
+                    STATUS: ONLINE / ACCEPTING CONTRACTS<br>
+                    LOCATION: HARARE, ZIMBABWE (GLOBAL REMOTE)
+                </div>
+            </div>
+        </section>
 
-    <section id="projects" class="glass animated fadeInLeft">
-      <h2><i class="fa-solid fa-folder-open"></i> Featured Projects & Products</h2>
-      <div class="featured-projects-grid">
-        <div class="project-card project-magnetic">
-          <img src="https://img.itch.zone/aW1nLzE3MTc5NzI3LnBuZw==/347x500/t3lSco.png" alt="MAGNETIC-The Game Cover" class="project-img" loading="lazy" decoding="async">
-          <div>
-            <h3><i class="fa-solid fa-magnet"></i> MAGNETIC — The Game <span class="tag" style="background:#ffe066;color:#333;padding:3px 8px;border-radius:7px;font-size:0.72em;margin-left:6px;">Open Beta</span></h3>
-            <p style="margin:6px 0 0 0;">
-              A 2D action-survival indie game with unique mouse-based movement and dynamic encounters.
-              <br><b>Platforms:</b> Windows<br>
-              <b>Made with:</b> Godot, GIMP, LMMS<br>
-              <b>Tags:</b> 2D, Action, Survival, Singleplayer
-            </p>
-            <a href="https://kufrashe.itch.io/magnetic-the-game" target="_blank" class="btn-small"><i class="fa-brands fa-itch-io"></i> Play Now on itch.io</a>
-          </div>
-        </div>
+        <section id="matrix" class="glass-panel" style="margin-top: 30px;">
+            <h2><i class="fa-solid fa-microchip"></i> SKILL MATRIX: CORE CAPABILITIES</h2>
+            <div class="skills-matrix-grid">
+                <div class="skill-group">
+                    <h3><i class="fa-solid fa-code"></i> System Engineering</h3>
+                    <div class="skill-tag">Python (Advanced)</div>
+                    <div class="skill-tag">C# / C++ / GDScript</div>
+                    <div class="skill-tag">SQL & NoSQL DBs</div>
+                    <div class="skill-tag">Full Stack Architecture</div>
+                    <div class="skill-tag">AI/ML Integration</div>
+                </div>
+                <div class="skill-group">
+                    <h3><i class="fa-solid fa-gamepad"></i> Digital Worlds (Gamedev)</h3>
+                    <div class="skill-tag">Godot Engine (Expert)</div>
+                    <div class="skill-tag">Unity Engine</div>
+                    <div class="skill-tag">3D/2D Level Design</div>
+                    <div class="skill-tag">Blender (Modeling)</div>
+                    <div class="skill-tag">Technical Art (GIMP)</div>
+                </div>
+                <div class="skill-group">
+                    <h3><i class="fa-solid fa-globe"></i> Platform & Web</h3>
+                    <div class="skill-tag">JavaScript / HTML / CSS</div>
+                    <div class="skill-tag">UI/UX Prototyping</div>
+                    <div class="skill-tag">API Design (REST)</div>
+                    <div class="skill-tag">Cloud/Vercel Deployment</div>
+                    <div class="skill-tag">SaaS Fundamentals</div>
+                </div>
+            </div>
+        </section>
 
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&q=60" alt="Connekt — Social Media Platform" class="project-img" loading="lazy" decoding="async">
-          <div>
-            <h3><i class="fa-solid fa-users"></i> Connekt — Social Media Platform</h3>
-            <p style="margin:6px 0 0 0;">
-              Scalable, user-friendly network with modern UI/UX and robust backend. Designed for communities and creators.
-            </p>
-            <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="btn-small">View on Company Site</a>
-          </div>
-        </div>
+        <section id="artifacts" class="glass-panel">
+            <h2><i class="fa-solid fa-folder-open"></i> DEPLOYED ARTIFACTS & EXPERIMENTS</h2>
+            <div class="artifact-grid">
 
-        <div class="project-card">
-          <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_1000,w_500,f_auto,q_auto/13243399/517773_624572.jpeg" alt="Programming Helper" class="project-img" loading="lazy" decoding="async">
-          <div>
-            <h3><i class="fa-solid fa-brain"></i> Programming Helper</h3>
-            <p style="margin:6px 0 0 0;">
-              Tools and helpers for Python & AI, open source on <a href="https://github.com/Kufrashe/Programming" target="_blank">GitHub</a>. Utilities, snippets, and small libraries for faster prototyping.
-            </p>
-          </div>
-        </div>
+                <div class="artifact-card featured-artifact">
+                    <h3>Catch Em Things <i class="fa-solid fa-star" style="color:var(--accent-secondary);"></i> (Flagship Game)</h3>
+                    <p>A polished, high-speed arcade game developed solo. This artifact demonstrates **immediate user delight** and **Godot Engine mastery** in a fully shipped product.</p>
+                    <img src="https://img.itch.zone/aW1nLzIyMjY5ODM0LnBuZw==/original/5nsg8z.png" alt="Catch Em Things Cover">
+                    <p class="project-meta-data"><strong>Status:</strong> Launched (Mobile/Windows/Linux) | <strong>Engine:</strong> Godot | <strong>Focus:</strong> Core Loop & SFX</p>
+                    <a href="https://kufrashe.itch.io/catch-em-things" target="_blank" class="artifact-link">// PLAY IT NOW ON ITCH.IO</a>
+                </div>
 
-        <div class="project-card">
-          <img src="https://kufrashe-technologies.mystrikingly.com/s/files/1/1180/4100/files/controller.png?width=150" alt="Ultimate Theft Simulator" class="project-img" loading="lazy" decoding="async">
-          <div>
-            <h3><i class="fa-solid fa-car"></i> Ultimate Theft Simulator 1</h3>
-            <p style="margin:6px 0 0 0;">
-              Ambitious open-world theft simulation game with dynamic AI.<br>
-              <a href="https://kufrashe-technologies.mystrikingly.com" target="_blank" class="btn-small">View on Company Site</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+                <div class="artifact-card">
+                    <h3>MAGNETIC — The Game <i class="fa-solid fa-terminal" style="color:#00ff00;"></i></h3>
+                    <p>A physics-based 2D action-survival game built to explore unique mouse-based control schemes. This artifact showcases **Godot engine mastery** and iterative design.</p>
+                    <img src="https://img.itch.zone/aW1nLzE3MTc5NzI3LnBuZw==/347x500/t3lSco.png" alt="MAGNETIC Cover">
+                    <p class="project-meta-data"><strong>Status:</strong> Open Beta | <strong>Engine:</strong> Godot | <strong>Metric:</strong> [Target: >500 Downloads]</p>
+                    <a href="https://kufrashe.itch.io/magnetic-the-game" target="_blank" class="artifact-link">// VIEW ITCH.IO LOG</a>
+                </div>
 
-    <section id="contact" class="glass animated fadeInRight">
-      <h2><i class="fa-solid fa-envelope"></i> Get in Touch</h2>
-      <div class="contact-cards">
-        <div class="contact-card">
-          <i class="fa-solid fa-building"></i>
-          <b>Kufrashe Technologies</b>
-          <span>Harare, Zimbabwe</span>
-          <span>Mon - Fri: 9am - 9pm</span>
-        </div>
-        <div class="contact-card">
-          <i class="fa-solid fa-globe"></i>
-          <a href="https://kufrashe-technologies.vercel.app" target="_blank">kufrashe-technologies.vercel.app</a>
-        </div>
-        <div class="contact-card">
-          <i class="fa-brands fa-github"></i>
-          <a href="https://github.com/Kufrashe" target="_blank">github.com/Kufrashe</a>
-        </div>
-        <div class="contact-card">
-          <i class="fa-brands fa-itch-io"></i>
-          <a href="https://kufrashe.itch.io" target="_blank">itch.io Portfolio</a>
-        </div>
-        <div class="contact-card">
-          <i class="fa-brands fa-linkedin"></i>
-          <a href="https://www.linkedin.com/in/kudakwashe-g-mazikana-0a1a3b302/" target="_blank">LinkedIn: Kudakwashe G Mazikana</a>
-        </div>
-        <div class="contact-card">
-          <i class="fa-brands fa-youtube"></i>
-          <a href="https://www.youtube.com/channel/UCRBQJFa2dBzJWFGzroGhDpA" target="_blank">YouTube: Kufrashe_Technologies</a>
-        </div>
-        <div class="contact-card">
-          <i class="fa-solid fa-envelope"></i>
-          <a href="mailto:mazikanakudakwasheg@gmail.com">mazikanakudakwasheg@gmail.com</a>
-        </div>
-        <div class="contact-card">
-          <i class="fa-solid fa-phone"></i>
-          <a href="tel:+263719364308">+263 71 936 4308</a>
-        </div>
-      </div>
-    </section>
-  </main>
+                <div class="artifact-card">
+                    <h3>CONNEKT — Social Platform <i class="fa-solid fa-users" style="color:var(--accent-primary);"></i></h3>
+                    <p>Architecture design for a scalable, user-friendly social media network. Focus on **robust backend development** and efficient data handling.</p>
+                    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&q=60" alt="Connekt Platform Mockup">
+                    <p class="project-meta-data"><strong>Status:</strong> Architecture Phase | <strong>Stack:</strong> Python, Full Stack JS | <strong>Focus:</strong> Scalability</p>
+                    <a href="https://kufrashe-technologies.vercel.app" target="_blank" class="artifact-link">// READ PROJECT MANIFEST</a>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 Kudakwashe G Mazikana & Kufrashe. All rights reserved. | <a href="https://github.com/Kufrashe" target="_blank">GitHub</a></p>
-  </footer>
+        <section id="connect" class="glass-panel">
+            <h2><i class="fa-solid fa-headset"></i> CONNECT: INITIATE HANDSHAKE</h2>
+            <div class="terminal-output">
+                // KUFRASHE G MAZIKANA - CONTACT TERMINAL V3.0<br>
+                > STATUS: READY_TO_COLLABORATE<br>
+                > INITIATE_EMAIL: <a href="mailto:mazikanakudakwasheg@gmail.com">mazikanakudakwasheg@gmail.com</a><br>
+                > INITIATE_LINKEDIN: <a href="https://www.linkedin.com/in/kudakwashe-g-mazikana-0a1a3b302/" target="_blank">linkedin.com/in/kudakwashe-g-mazikana</a><br>
+                > TRACE_SIGNAL_GITHUB: <a href="https://github.com/Kufrashe" target="_blank">github.com/Kufrashe</a><br>
+                > END_TRANSMISSION...
+            </div>
+        </section>
+    </main>
 
-  <script>
-    // Typewriter effect for multi-role (kept as is, but reduced random delay)
-    const roles = [
-      "Software Engineer",
-      "Game Developer",
-      "Full Stack Engineer",
-      "Python & AI Enthusiast",
-      "Indie Tech Innovator",
-      "3D Artist & Designer",
-      "Founder @ Kufrashe Technologies"
-    ];
-    let twIndex = 0, twChar = 0, twBack = false;
-    function typeWriter() {
-      const twSpan = document.getElementById('typewriter-text');
-      if (!twSpan) return;
-      const fullText = roles[twIndex];
-      if (!twBack && twChar <= fullText.length) {
-        twSpan.textContent = fullText.substring(0, twChar++);
-        setTimeout(typeWriter, 60 + Math.random()*20); // faster
-      } else if (!twBack && twChar > fullText.length) {
-        twBack = true;
-        setTimeout(typeWriter, 900);
-      } else if (twBack && twChar > 0) {
-        twSpan.textContent = fullText.substring(0, --twChar);
-        setTimeout(typeWriter, 20);
-      } else {
-        twBack = false;
-        twIndex = (twIndex + 1) % roles.length;
-        setTimeout(typeWriter, 350);
-      }
-    }
-    window.addEventListener('DOMContentLoaded', typeWriter);
+    <footer style="text-align:center; padding:20px; color:var(--text-muted); font-size:0.85rem;">
+        <p>Kudakwashe G Mazikana // Code Artifacts 2025</p>
+    </footer>
 
-    // Techy background particles (reduced number for perf)
-    const canvas = document.getElementById('tech-bg');
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.length = 20 + Math.random() * 60;
-      this.angle = Math.random() * Math.PI * 2;
-      this.speed = 0.5 + Math.random();
-      this.alpha = 0.06 + Math.random() * 0.18;
-      this.color = ["#eebbc3", "#7f53ac", "#fe8c00", "#647dee"][Math.floor(Math.random() * 4)];
-      this.draw = function() {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(
-          this.x + Math.cos(this.angle) * this.length,
-          this.y + Math.sin(this.angle) * this.length
-        );
-        ctx.stroke();
-        ctx.restore();
-      };
-      this.update = function() {
-        this.x += Math.cos(this.angle) * this.speed;
-        this.y += Math.sin(this.angle) * this.speed;
-        if (
-          this.x < -100 || this.x > canvas.width + 100 ||
-          this.y < -100 || this.y > canvas.height + 100
-        ) {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
+    <script>
+        const animatedSections = document.querySelectorAll('.glass-panel');
+        function checkFade() {
+            animatedSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    section.classList.add('visible');
+                }
+            });
         }
-      };
-    }
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for(let p of particles) {
-        p.update();
-        p.draw();
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    function initParticles() {
-      particles = [];
-      const numParticles = window.innerWidth < 600 ? 16 : 28; // fewer for perf
-      for(let i=0; i<numParticles; i++) particles.push(new Particle());
-    }
-    window.addEventListener('resize', () => {resizeCanvas();initParticles();});
-    initParticles();
-    animateParticles();
-
-    // Section fade-in on scroll
-    const animatedSections = document.querySelectorAll('.animated');
-    function checkFade() {
-      animatedSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 50) {
-          section.classList.add('visible');
+        window.addEventListener('scroll', checkFade, {passive:true});
+        window.addEventListener('load', checkFade);
+        document.querySelectorAll('.glass-panel').forEach(el => el.style.opacity = 0);
+        document.querySelectorAll('.glass-panel').forEach(el => el.style.transition = 'opacity 0.8s ease-out, transform 0.4s ease, box-shadow 0.4s ease');
+        window.onload = () => {
+            document.querySelectorAll('.glass-panel').forEach(el => el.style.opacity = 1);
         }
-      });
-    }
-    window.addEventListener('scroll', checkFade, {passive:true});
-    window.addEventListener('load', checkFade);
+        
+        document.querySelectorAll('.artifact-card').forEach(card => {
+          const link = card.querySelector('a');
+          if(link) card.addEventListener('click', () => window.open(link.href, '_blank'));
+        });
 
-    // Perf: Defer loading of images in featured projects
-    document.querySelectorAll('.project-img').forEach(img => {
-      img.setAttribute('loading', 'lazy');
-      img.decoding = 'async';
-    });
-
-    // Small accessibility: make game-cover reachable
-    document.querySelectorAll('.game-cover').forEach(el => el.setAttribute('tabindex','0'));
-  </script>
+    </script>
 </body>
-</html>
